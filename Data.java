@@ -52,7 +52,7 @@ public class Data {
 
         // add grade for class for student S002
         Data.grades.put(
-            "S001",
+            "S002",
             new HashMap<>(Map.of("CS2413", 85.0, "CS2063", 92.0))
         );
     }
