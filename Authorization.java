@@ -21,7 +21,7 @@ public class Authorization {
 
         switch(actionName){
 
-            case "view_course":
+            case "view_courses":
             case "view_grades":
                 return role.equals("student") || role.equals("professor") || role.equals("dean");
 
@@ -59,10 +59,10 @@ public class Authorization {
         String role = Data.users.get(actorId);
 
         if(role.equals("student")){
-            return Actions.getProfessorCourses(actorId);        }
+            return Actions.getStudentCourses(actorId);        }
 
         if(role.equals("professor")){
-            return Actions.getAllCourses();
+            return Actions.getProfessorCourses(actorId);
         }
 
         if(role.equals("dean")){
@@ -110,7 +110,12 @@ public class Authorization {
 
     //View a specific grade
     public static Double viewGrade(String actorId, String studentId, String courseId){
-        if(!"student". equals(Data.users.get(studentId))){
+
+        if(!hasPermission(actorId, "view_grades")){
+            return null;
+        }
+
+        if(!"student".equals(Data.users.get(studentId))){
             return null;
         }
 
